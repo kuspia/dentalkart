@@ -1,0 +1,36 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <title>Writer's Musings</title>
+    </head>
+        <body>
+            <div class="page-header" >
+            {%if user.is_authenticated %}
+                    <a href="{% url 'post_new' %}" class="top-menu text-right" ><span class="glyphicon glyphicon-plus"></span>  </a>&nbsp&nbsp
+                    &nbsp&nbsp<a href="{% url 'post_draft_list' %}" class="top-menu text-right"><span class="glyphicon glyphicon-edit"></span></a>
+                     <p class="top-menu text-right">Hello {{ user.username }}!  <small>(<a href="{% url 'auth_logout' %}">Log out</a>)</small></p>
+            {% else %}
+                    <a href="{% url 'registration_register' %}">Register</a>&nbsp&nbsp
+                    <a href="{% url 'auth_login' %}" class="top-menu text-right"><span class="glyphicon glyphicon-lock">LogIn</span></a>
+
+            {% endif %}
+                <h1><a href="/">Writer's Musings</a></h1>
+            </div>
+            <div class="content container">
+                <div class="row">
+                    <div class="col-md-8">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+            <footer>
+            <hr>
+                <small align="center">&copy;Rishav Sapahia.All Rights Reserved.</small><br>
+            </footer>
+        </body>
+</html>
